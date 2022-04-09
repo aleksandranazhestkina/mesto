@@ -7,3 +7,10 @@
   color: #FFFFFF;
   min-width: max-content;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__title {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}

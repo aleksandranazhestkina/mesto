@@ -1,7 +1,16 @@
 .profile__button-edit {
+  padding: 0;
   background-color: black;
   border: 1px solid white;
-  box-sizing: border-box;
   margin-top: 37px;
   margin-left: 18px;
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__button-edit {
+    width: 18px;
+    height: 18px;
+  }
 }
