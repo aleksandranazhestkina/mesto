@@ -1,34 +1,79 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
   <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
+
 <body class="page">
   <header class="header">
     <img class="header__logo" src="./images/HeaderLogo.svg" alt="Mesto">
   </header>
   <main>
-  <section class="profile">
-    <div class="profile__content">
-    <img class="profile__avatar" src="./images/Avatar.jpg" alt="Жак-Ив Кусто">
-    <div class="profile__info">
-      <h1 class="profile__title">Жак-Ив Кусто</h1>
-      <p class="profile__subtitle">Исследователь океана</p>
-    </div>
+    <section class="profile">
+      <div class="profile__content">
+        <img class="profile__avatar" src="./images/Avatar.jpg" alt="Жак-Ив Кусто">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <form>
+          <button class="profile__button-edit"><img src="./images/EditButton.svg" alt="Карандаш"></button>
+        </form>
+      </div>
       <form>
-        <button class="profile__button-edit"><img src="./images/EditButton.svg" alt="Карандаш"></button>
+        <button class="profile__button-add"><img src="./images/AddButtonPlus.svg" alt="Плюс"></button>
       </form>
-    </div>
-    <form>
-      <button class="profile__button-add"><img src="./images/AddButtonPlus.svg" alt="Плюс"></button>
-    </form>
-  </section>
-  <section class="elements">
-
-  </section>
+    </section>
+    <section class="elements">
+      <ul class="elements">
+        <li class="elements__card">
+          <img class="elements__image" src="./images/Karachayevsk.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">Карачаево- Черкессия</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/Ural.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">Урал</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/dombay.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">Домбай</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/Elbrus.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">гора Эльбрус</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/Rosa.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">Роза-Хутор</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+        <li class="elements__card">
+          <img class="elements__image" src="./images/Krasnoyarsk.jpg" alt="Горы">
+          <div class="elements__text">
+            <h2 class="elements__title">Красноярск</h2>
+            <img class="elements__like" src="./images/Like.svg" alt="сердце">
+          </div>
+        </li>
+      </ul>
+    </section>
 
   </main>
   <footer class="footer">
@@ -36,4 +81,5 @@
   </footer>
   <script></script>
 </body>
+
 </html>
