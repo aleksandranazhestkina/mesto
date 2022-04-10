@@ -1,0 +1,7 @@
+.popup__container {
+  height: 370px;
+  width: 470px;
+  position: relative;
+  display: flex;
+  align-items: end;
+}
