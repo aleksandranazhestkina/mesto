@@ -7,5 +7,11 @@
   border-top: 0;
   border-left: 0;
   border-right: 0;
-  border-bottom: 1px solid opacity: 0.5;
+  border-bottom: 1px solid opacity 0.5;
+}
+
+@media screen and (max-width: 320px) {
+  .popup__line-about {
+    width: 238px;
+  }
 }

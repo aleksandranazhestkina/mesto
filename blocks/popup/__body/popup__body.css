@@ -9,3 +9,10 @@
   align-items: center;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 320px) {
+  .popup__body {
+    min-width: 282px;
+    min-height: 330px;
+  }
+}
