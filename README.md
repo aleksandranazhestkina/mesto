@@ -9,7 +9,7 @@
 **Описание** <a name = "Описание"></a>
 
 
-Проект [Mesto](https://aleksandranazhestkina.github.io/russian-travel/index.html)- это интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
+Проект [Mesto](https://aleksandranazhestkina.github.io/mesto/index.html)- это интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 ![alt-screenshot](/images/Screenchot2.png)
 
 **С чего начать** <a name = "С чего начать"></a>
