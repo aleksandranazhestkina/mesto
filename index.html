@@ -19,9 +19,7 @@
         <div class="profile__info">
           <div class="profile__edit-title">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <form>
               <button class="profile__button-edit"><img src="./images/EditButton.svg" alt="Карандаш"></button>
-            </form>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
@@ -121,22 +119,16 @@
   <div class="popup">
     <div class="popup__background"></div>
     <div class="popup__container">
-      <form>
         <button class="popup__button-close">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 18L12 10L20 2L18 0L10 8L2 0L0 2L8 10L0 18L2 20L10 12L18 20L20 18Z" fill="white" />
           </svg>
         </button>
-      </form>
       <form class="popup__body">
         <h3 class="popup__title">Редактировать профиль</h3>
-        <label>
-          <input class="popup__line-name" type="text" placeholder="Имя"></label>
-        <label>
-          <input class="popup__line-about" type="text" placeholder="О себе"></label>
-        <form>
-          <button class="popup__button-save">Сохранить</button>
-        </form>
+        <input class="popup__line-name" type="text" placeholder="Имя" value="" name="name">
+        <textarea class="popup__line-about" placeholder="О себе" value="" name="job"></textarea>
+        <button class="popup__button-save" type="submit">Сохранить</button>
       </form>
     </div>
   </div>

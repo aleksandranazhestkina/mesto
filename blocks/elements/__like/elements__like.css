@@ -5,11 +5,10 @@
   cursor: pointer;
   transform: opacity 0.4s;
 }
+.elements__like:active {
+  background-image: url("../../../images/LikeActive.svg");
+}
 
 .elements__like:hover {
   opacity: 0.5;
-}
-
-.elements__like:active {
-  fill: black;
 }
