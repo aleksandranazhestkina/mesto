@@ -20,9 +20,7 @@ function onDocumentKeyUp(event) {
 }
 
 openPopupButton.addEventListener('click', popupOpenToggle);
-
 closePopup.addEventListener('click', popupOpenToggle);
-
 
 let formElement = document.querySelector('.popup__body');
 let nameInput = document.querySelector('.popup__line-name');

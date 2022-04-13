@@ -5,6 +5,7 @@
   cursor: pointer;
   transform: opacity 0.4s;
 }
+
 .elements__like:active {
   background-image: url("../../../images/LikeActive.svg");
 }
