@@ -1,9 +1,10 @@
 .profile__content {
   display: flex;
+  max-width: 60%;
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
   .profile__content {
     justify-content: center;
   }

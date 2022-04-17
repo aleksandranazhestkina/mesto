@@ -1,8 +1,5 @@
-.popup__body {
-  background-color: #FFF;
-  border-radius: 10px;
-  min-width: 430px;
-  min-height: 330px;
+.popup__form {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,8 +7,8 @@
 }
 
 @media screen and (max-width: 900px) {
-  .popup__body {
+  .popup__form {
     min-width: 282px;
-    max-height: 322px;
+    max-height: 200px;
   }
 }

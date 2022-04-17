@@ -3,9 +3,14 @@
   object-position: top;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 850px) {
+  .header__logo {
+    padding-left: 27px;
+  }
+}
+
+@media screen and (max-width: 750px) {
   .header__logo {
     max-width: 104px;
-    padding-left: 27px;
   }
 }

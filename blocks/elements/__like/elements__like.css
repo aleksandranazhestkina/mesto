@@ -1,4 +1,7 @@
 .elements__like {
+  background-image: url("../../../images/Like.svg");
+  background-repeat: no-repeat;
+  border: none;
   width: 22px;
   height: 19px;
   padding-right: 30px;
@@ -6,10 +9,11 @@
   transform: opacity 0.4s;
 }
 
-.elements__like:active {
-  background-image: url("../../../images/LikeActive.svg");
-}
-
 .elements__like:hover {
   opacity: 0.5;
+}
+
+.elements__like:active{
+  background-image: url("../../../images/LikeActive.svg");
+  opacity: 1;
 }

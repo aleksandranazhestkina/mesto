@@ -5,8 +5,11 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 900px) {
   .profile {
     justify-content: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
