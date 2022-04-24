@@ -1,0 +1,10 @@
+.elements__cards {
+  min-height: min-content;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+  margin-top: 22px;
+}
