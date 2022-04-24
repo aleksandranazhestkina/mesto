@@ -4,8 +4,6 @@ const popup = document.querySelector(".popup");
 const closePopup = popup.querySelector(".popup__button-close");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
-const elementTitle = document.querySelector(".elements__title");
-const elementImage = document.querySelector(".elements__image");
 
 // Переменные input
 const formElement = document.querySelector(".popup__form");
@@ -25,7 +23,7 @@ function popupOpenToggle() {
   popup.classList.toggle("popup_opened");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-};
+}
 
 openPopupButton.addEventListener("click", popupOpenToggle);
 closePopup.addEventListener("click", popupOpenToggle);
@@ -40,7 +38,6 @@ function formSubmitHandler(evt) {
 }
 
 formElement.addEventListener("submit", formSubmitHandler);
-
 
 // Массив карточек
 
@@ -71,6 +68,11 @@ const initialCards = [
   },
 ];
 
+// Шаблоны
+
+const elementsTemplate = document
+  .querySelector("#elements__card-template")
+  .content.querySelector(".elements__card");
 
 // Переменные формы карточек
 
@@ -79,33 +81,34 @@ const formElementCard = document.querySelector(".popup__form_card");
 const nameInputCard = document.querySelector(".popup__input_card_name");
 const aboutInputCard = document.querySelector(".popup__input_card_link");
 
+// Генерация карточки
+
+const generateElementCard = (initialCardsData) => {
+  const newElementCard = elementsTemplate.cloneNode(true);
+
+  const elementTitle = newElementCard.querySelector(".elements__title");
+  elementTitle.textContent =  initialCardsData.name;
+  const elementImage = newElementCard.querySelector(".elements__image");
+  elementImage.src =  initialCardsData.link;
+
+  return newElementCard;
+}
+
 // Добавление карточки
 
 const renderElementsCard = (initialCardsData) => {
-  elementsCardContainer.insertAdjacentHTML(
-    "afterbegin",
-    `
-    <li class="elements__card">
-      <img class="elements__image" src="${initialCardsData.link}">
-      <div class="elements__text">
-        <h2 class="elements__title">${initialCardsData.name}</h2>
-        <button class="elements__like" type="button"></button>
-      </div>
-    </li>
-    `
-  );
+  elementsCardContainer.prepend(generateElementCard(initialCardsData));
 };
 
 initialCards.forEach((initialCardsData) => {
   renderElementsCard(initialCardsData);
 });
 
-
 // Открытие и закрытие попапа с карточками
 
 function popupCardOpenToggle() {
   popupCard.classList.toggle("popup_opened");
-};
+}
 
 openNewCardButton.addEventListener("click", popupCardOpenToggle);
 closeCardPopup.addEventListener("click", popupCardOpenToggle);
@@ -114,7 +117,7 @@ closeCardPopup.addEventListener("click", popupCardOpenToggle);
 
 const formSubmitHandlerCard = (event) => {
   event.preventDefault();
-  renderElementsCard({name: nameInputCard.value, link: aboutInputCard.value});
+  renderElementsCard({ name: nameInputCard.value, link: aboutInputCard.value });
   popupCard.classList.remove("popup_opened");
 };
 
