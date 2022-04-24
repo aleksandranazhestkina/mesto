@@ -1,6 +1,7 @@
 .elements__cards {
   min-height: min-content;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
