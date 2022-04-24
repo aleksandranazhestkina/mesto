@@ -1,8 +1,46 @@
+// Переменные для работы с popup в профиле
 const openPopupButton = document.querySelector(".profile__button-edit");
 const popup = document.querySelector(".popup");
 const closePopup = popup.querySelector(".popup__button-close");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
+const elementTitle = document.querySelector(".elements__title");
+const elementImage = document.querySelector(".elements__image");
+
+// Переменные input
+const formElement = document.querySelector(".popup__form");
+const nameInput = document.querySelector(".popup__input_name");
+const jobInput = document.querySelector(".popup__input_about");
+const buttonSave = document.querySelector(".popup__button-save");
+const buttonSaveCard = document.querySelector(".popup__button-save_card");
+
+// Переменные для открытия popup__card
+const openNewCardButton = document.querySelector(".profile__button-add");
+const popupCard = document.querySelector(".popup_card");
+const closeCardPopup = document.querySelector(".popup__button-close_card");
+
+// Открытие popup с сохранением значений input
+
+function popupOpenToggle() {
+  popup.classList.toggle("popup_opened");
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+};
+
+openPopupButton.addEventListener("click", popupOpenToggle);
+closePopup.addEventListener("click", popupOpenToggle);
+
+// Функция submit профиль
+
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  popup.classList.remove("popup_opened");
+}
+
+formElement.addEventListener("submit", formSubmitHandler);
+
 
 // Массив карточек
 
@@ -33,36 +71,27 @@ const initialCards = [
   },
 ];
 
-// Шаблоны
 
-
-
-// Дом элементы
+// Переменные формы карточек
 
 const elementsCardContainer = document.querySelector(".elements__cards");
-
-
-// Обработчики событий
-
-
-
-// Генерация карточки
-
-
+const formElementCard = document.querySelector(".popup__form_card");
+const nameInputCard = document.querySelector(".popup__input_card_name");
+const aboutInputCard = document.querySelector(".popup__input_card_link");
 
 // Добавление карточки
 
 const renderElementsCard = (initialCardsData) => {
   elementsCardContainer.insertAdjacentHTML(
-    "beforeend",
+    "afterbegin",
     `
     <li class="elements__card">
-    <img class="elements__image" src="${initialCardsData.link}">
-    <div class="elements__text">
-      <h2 class="elements__title">${initialCardsData.name}</h2>
-      <button class="elements__like" type="button"></button>
-    </div>
-  </li>
+      <img class="elements__image" src="${initialCardsData.link}">
+      <div class="elements__text">
+        <h2 class="elements__title">${initialCardsData.name}</h2>
+        <button class="elements__like" type="button"></button>
+      </div>
+    </li>
     `
   );
 };
@@ -72,34 +101,21 @@ initialCards.forEach((initialCardsData) => {
 });
 
 
+// Открытие и закрытие попапа с карточками
 
-// Открытие popup с сохранением значений input
+function popupCardOpenToggle() {
+  popupCard.classList.toggle("popup_opened");
+};
 
-function popupOpenToggle() {
-  popup.classList.toggle("popup_opened");
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-}
+openNewCardButton.addEventListener("click", popupCardOpenToggle);
+closeCardPopup.addEventListener("click", popupCardOpenToggle);
 
-// Слушатели кнопок открытия и закрытия
+// Функция submit карточки
 
-openPopupButton.addEventListener("click", popupOpenToggle);
-closePopup.addEventListener("click", popupOpenToggle);
+const formSubmitHandlerCard = (event) => {
+  event.preventDefault();
+  renderElementsCard({name: nameInputCard.value, link: aboutInputCard.value});
+  popupCard.classList.remove("popup_opened");
+};
 
-// Переменные input
-
-let formElement = document.querySelector(".popup__form");
-let nameInput = document.querySelector(".popup__input_name");
-let jobInput = document.querySelector(".popup__input_about");
-let buttonSave = document.querySelector(".popup__button-save");
-
-// Функция submit
-
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  popup.classList.remove("popup_opened");
-}
-
-formElement.addEventListener("submit", formSubmitHandler);
+formElementCard.addEventListener("submit", formSubmitHandlerCard);
