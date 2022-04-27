@@ -1,5 +1,6 @@
 .elements__card {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: space-between;
   max-width: 282px;
