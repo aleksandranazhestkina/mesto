@@ -23,7 +23,7 @@ function popupOpenToggle() {
   popup.classList.toggle("popup_opened");
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-}
+};
 
 openPopupButton.addEventListener("click", popupOpenToggle);
 closePopup.addEventListener("click", popupOpenToggle);
@@ -35,7 +35,7 @@ function formSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   popup.classList.remove("popup_opened");
-}
+};
 
 formElement.addEventListener("submit", formSubmitHandler);
 
@@ -81,18 +81,35 @@ const formElementCard = document.querySelector(".popup__form_card");
 const nameInputCard = document.querySelector(".popup__input_card_name");
 const aboutInputCard = document.querySelector(".popup__input_card_link");
 
+// Обработчики событий
+
+const handleDeleteCard = (event) => {
+  event.target.closest(".elements__card").remove();
+};
+
+function handleLikeCard(event) {
+  event.target.classList.toggle("elements__like_active");
+};
+
 // Генерация карточки
 
 const generateElementCard = (initialCardsData) => {
   const newElementCard = elementsTemplate.cloneNode(true);
 
   const elementTitle = newElementCard.querySelector(".elements__title");
-  elementTitle.textContent =  initialCardsData.name;
+  elementTitle.textContent = initialCardsData.name;
+
   const elementImage = newElementCard.querySelector(".elements__image");
-  elementImage.src =  initialCardsData.link;
+  elementImage.src = initialCardsData.link;
+
+  const deleteButtonCard = newElementCard.querySelector(".elements__basket");
+  deleteButtonCard.addEventListener("click", handleDeleteCard);
+
+  const likeButtonCard = newElementCard.querySelector(".elements__like");
+  likeButtonCard.addEventListener("click", handleLikeCard);
 
   return newElementCard;
-}
+};
 
 // Добавление карточки
 
@@ -108,7 +125,7 @@ initialCards.forEach((initialCardsData) => {
 
 function popupCardOpenToggle() {
   popupCard.classList.toggle("popup_opened");
-}
+};
 
 openNewCardButton.addEventListener("click", popupCardOpenToggle);
 closeCardPopup.addEventListener("click", popupCardOpenToggle);
