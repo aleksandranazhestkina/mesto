@@ -12,10 +12,11 @@ const jobInput = document.querySelector(".popup__input_about");
 const buttonSave = document.querySelector(".popup__button-save");
 const buttonSaveCard = document.querySelector(".popup__button-save_card");
 
-// Переменные для открытия popup__card
+// Переменные для открытия popup_card
 const openNewCardButton = document.querySelector(".profile__button-add");
 const popupCard = document.querySelector(".popup_card");
-const closeCardPopup = document.querySelector(".popup__button-close_card");
+const closeCardPopup = popupCard.querySelector(".popup__button-close_card");
+
 
 // Открытие popup с сохранением значений input
 
@@ -91,6 +92,21 @@ function handleLikeCard(event) {
   event.target.classList.toggle("elements__like_active");
 };
 
+// Переменные для открытия popup_image
+
+const popupImage = document.querySelector(".popup_image");
+const elementPopupImage = document.querySelector(".popup__card-image")
+const ImageTitle = document.querySelector(".popup__subtitle");
+
+// Функция добавления данных в попап
+
+function imagePopupHandler(initialCardsData) {
+  elementPopupImage.src = initialCardsData.link;
+  ImageTitle.textContent = initialCardsData.name;
+
+  openPopupImage(popupImage)
+};
+
 // Генерация карточки
 
 const generateElementCard = (initialCardsData) => {
@@ -98,6 +114,7 @@ const generateElementCard = (initialCardsData) => {
 
   const elementTitle = newElementCard.querySelector(".elements__title");
   elementTitle.textContent = initialCardsData.name;
+  elementTitle.alt = initialCardsData.name;
 
   const elementImage = newElementCard.querySelector(".elements__image");
   elementImage.src = initialCardsData.link;
@@ -108,7 +125,22 @@ const generateElementCard = (initialCardsData) => {
   const likeButtonCard = newElementCard.querySelector(".elements__like");
   likeButtonCard.addEventListener("click", handleLikeCard);
 
+  elementImage.addEventListener("click", () => imagePopupHandler(initialCardsData));
+
   return newElementCard;
+};
+
+
+
+const closeImagePopup = document.querySelector(".popup__button-close_image");
+closeImagePopup.addEventListener("click", closePopupImage);
+
+function openPopupImage(popupImage) {
+  popupImage.classList.add("popup_opened");
+};
+
+function closePopupImage(evt) {
+  evt.target.closest(".popup_opened").classList.remove("popup_opened");
 };
 
 // Добавление карточки
