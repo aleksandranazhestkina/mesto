@@ -1,7 +1,6 @@
 .popup__body {
   background-color: #FFF;
   border-radius: 10px;
-  min-width: 430px;
   min-height: 330px;
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@
 
 @media screen and (max-width: 900px) {
   .popup__body {
-    min-width: 282px;
-    max-height: 322px;
+    min-width: 240px;
+    min-height: 160px;
   }
 }
