@@ -122,7 +122,7 @@ initialCards.forEach((initialCardsData) => {
 const handleFormSubmitCard = (event) => {
   event.preventDefault();
   renderElementsCard({ name: nameInputCard.value, link: aboutInputCard.value });
-  popupCard.classList.remove("popup_opened");
+  closePopup(formElementCard);
   event.target.reset();
 };
 
@@ -134,7 +134,7 @@ function submitFormHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  popup.classList.remove("popup_opened");
+  closePopup(popupProfileForm);
 };
 
 popupProfileForm.addEventListener("submit", submitFormHandler);
