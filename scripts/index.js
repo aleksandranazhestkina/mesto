@@ -1,16 +1,17 @@
 // Переменные для работы с popup в профиле
+const popup = document.querySelectorAll(".popup");
 const openPopupButton = document.querySelector(".profile__button-edit");
-const popup = document.querySelector(".popup");
-const closeProfilePopup = popup.querySelector(".popup__button-close");
+const popupProfile = document.querySelector(".popup__profile")
+const closeProfilePopup = document.querySelector(".popup__button-close");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 
 // Переменные input
-const popupProfileForm = popup.querySelector(".popup__form");
-const nameInput = popup.querySelector(".popup__input_name");
-const jobInput = popup.querySelector(".popup__input_about");
-const buttonSave = popup.querySelector(".popup__button-save");
-const buttonSaveCard = popup.querySelector(".popup__button-save_card");
+const popupProfileForm = document.querySelector(".popup__form");
+const nameInput = document.querySelector(".popup__input_name");
+const jobInput = document.querySelector(".popup__input_about");
+const buttonSave = document.querySelector(".popup__button-save");
+const buttonSaveCard = document.querySelector(".popup__button-save_card");
 
 // Переменные для открытия popup_card
 const openNewCardButton = document.querySelector(".profile__button-add");
@@ -46,16 +47,43 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
 };
 
-closeProfilePopup.addEventListener("click", () => closePopup(popup));
+closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
 closeImagePopup.addEventListener("click", () => closePopup(popupImage));
 closeCardPopup.addEventListener("click", () => closePopup(popupCard));
+
+
+// Функция закрытия попапа overlay
+
+function closePopupProfileOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupProfile);
+  }
+}
+
+function closePopupImageOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupImage);
+  }
+}
+
+function closePopupCardOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(popupCard);
+  }
+}
+
+popupProfile.addEventListener("click", closePopupProfileOverlay);
+popupImage.addEventListener("click", closePopupImageOverlay);
+popupCard.addEventListener("click", closePopupCardOverlay);
+
+// 
 
 // Открытие popup профиля с сохранением значений input
 
 function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  openPopup(popup);
+  openPopup(popupProfile);
 };
 
 // Шаблоны
