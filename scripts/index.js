@@ -76,7 +76,16 @@ popupProfile.addEventListener("click", closePopupProfileOverlay);
 popupImage.addEventListener("click", closePopupImageOverlay);
 popupCard.addEventListener("click", closePopupCardOverlay);
 
-// 
+// Закрытие попапа Esc
+
+document.addEventListener("keydown", function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupProfile);
+    closePopup(popupCard);
+    closePopup(popupImage);
+  }
+});
+
 
 // Открытие popup профиля с сохранением значений input
 
