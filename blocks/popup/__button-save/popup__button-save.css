@@ -1,13 +1,11 @@
 .popup__button-save {
   padding: 0;
-  margin-bottom: 37px;
-  margin-top: 18px;
+  margin: 18px auto 37px;
   background-color: #000;
   color: #FFF;
   font-size: 18px;
   line-height: 22px;
   width: 83%;
-  min-width: max-content;
   min-height: 50px;
   border: 0;
   cursor: pointer;

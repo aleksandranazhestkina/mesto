@@ -1,5 +1,11 @@
+// Переменные формы
+
+const popupProfileForm = document.querySelector("#profile-form");
+const formElementCard = document.querySelector("#card-form");
+
 // Переменные для работы с popup в профиле
-const popup = document.querySelectorAll(".popup");
+
+const popupList = document.querySelectorAll(".popup");
 const openPopupButton = document.querySelector(".profile__button-edit");
 const popupProfile = document.querySelector(".popup__profile")
 const closeProfilePopup = document.querySelector(".popup__button-close");
@@ -7,13 +13,14 @@ const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 
 // Переменные input
-const popupProfileForm = document.querySelector(".popup__form");
-const nameInput = document.querySelector(".popup__input_name");
-const jobInput = document.querySelector(".popup__input_about");
-const buttonSave = document.querySelector(".popup__button-save");
-const buttonSaveCard = document.querySelector(".popup__button-save_card");
+
+const nameInput = document.querySelector("#profile-name");
+const jobInput = document.querySelector("#profile-about");
+const buttonSave = document.querySelector("#profile-submit");
+const buttonSaveCard = document.querySelector("#card-submit");
 
 // Переменные для открытия popup_card
+
 const openNewCardButton = document.querySelector(".profile__button-add");
 const popupCard = document.querySelector(".popup_card");
 const closeCardPopup = popupCard.querySelector(".popup__button-close_card");
@@ -21,9 +28,8 @@ const closeCardPopup = popupCard.querySelector(".popup__button-close_card");
 // Переменные формы карточек
 
 const elementsCardContainer = document.querySelector(".elements__cards");
-const formElementCard = document.querySelector(".popup__form_card");
-const nameInputCard = document.querySelector(".popup__input_card_name");
-const aboutInputCard = document.querySelector(".popup__input_card_link");
+const nameInputCard = document.querySelector("#card-name");
+const aboutInputCard = document.querySelector("#card-link");
 
 // Переменные для открытия popup_image
 
@@ -36,6 +42,7 @@ const closeImagePopup = document.querySelector(".popup__button-close_image");
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closePopupEsc);
 };
 
 openPopupButton.addEventListener("click", () => openPopupProfile());
@@ -45,6 +52,7 @@ openNewCardButton.addEventListener("click", () => openPopup(popupCard));
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closePopupEsc);
 };
 
 closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
@@ -54,38 +62,21 @@ closeCardPopup.addEventListener("click", () => closePopup(popupCard));
 
 // Функция закрытия попапа overlay
 
-function closePopupProfileOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupProfile);
+function closePopupOverlay(evt) {
+  if (evt.target === evt.currentTarget) { 
+    closePopup(popup);
   }
 }
 
-function closePopupImageOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupImage);
-  }
-}
-
-function closePopupCardOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(popupCard);
-  }
-}
-
-popupProfile.addEventListener("click", closePopupProfileOverlay);
-popupImage.addEventListener("click", closePopupImageOverlay);
-popupCard.addEventListener("click", closePopupCardOverlay);
+popupProfile.addEventListener("click", closePopupOverlay);
+popupImage.addEventListener("click", closePopupOverlay);
+popupCard.addEventListener("click", closePopupOverlay);
 
 // Закрытие попапа Esc
 
-document.addEventListener("keydown", function (evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupProfile);
-    closePopup(popupCard);
-    closePopup(popupImage);
-  }
-});
-
+function closePopupEsc (evt) {
+  if (evt.key === 'Escape') {}
+}
 
 // Открытие popup профиля с сохранением значений input
 
@@ -159,7 +150,7 @@ initialCards.forEach((initialCardsData) => {
 const handleFormSubmitCard = (event) => {
   event.preventDefault();
   renderElementsCard({ name: nameInputCard.value, link: aboutInputCard.value });
-  closePopup(formElementCard);
+  closePopup(popupCard);
   event.target.reset();
 };
 
@@ -171,7 +162,7 @@ function submitFormHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(popupProfileForm);
+  closePopup(popupProfile);
 };
 
 popupProfileForm.addEventListener("submit", submitFormHandler);
