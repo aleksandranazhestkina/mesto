@@ -1,7 +1,3 @@
-// Переменные общие
-
-const buttonCLose = document.querySelectorAll(".popup__button-close")
-
 // Переменные формы
 
 const popupProfileForm = document.querySelector("#profile-form");
@@ -132,7 +128,7 @@ const generateElementCard = (initialCardsData) => {
   likeButtonCard.addEventListener("click", handleLikeCard);
 
   elementImage.addEventListener("click", () =>
-  handleImagePopup(initialCardsData));
+    handleImagePopup(initialCardsData));
 
   return newElementCard;
 };

@@ -1,11 +1,11 @@
 const enableValidation = {
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button-save",
-    inactiveButtonClass: "popup__button-save_disabled",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "error_visible",
-    errorText: ".error"
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-save",
+  inactiveButtonClass: "popup__button-save_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "error_visible",
+  errorText: ".error"
 };
 
 // Показ ошибки
@@ -45,12 +45,12 @@ const hasInvalidInput = (inputList) => {
 const buttonsSubmitActive = (buttonsSubmit) => {
   buttonsSubmit.classList.remove(enableValidation.inactiveButtonClass);
   buttonsSubmit.disabled = false;
-}
+};
 
 const buttonsSubmitNoActive = (buttonsSubmit) => {
   buttonsSubmit.classList.add(enableValidation.inactiveButtonClass);
   buttonsSubmit.setAttribute("disabled", true);
-}
+};
 
 const tooggleButtonState = (inputList, buttonsSubmit) => {
   if (hasInvalidInput(inputList)) {
@@ -79,7 +79,7 @@ const setEventListener = (formElement) => {
 
 // Функция создания массива всех форм
 
-function isValid () {
+function isValid() {
   const formList = Array.from(
     document.querySelectorAll(enableValidation.formSelector)
   );
