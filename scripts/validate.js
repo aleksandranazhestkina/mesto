@@ -42,13 +42,21 @@ const hasInvalidInput = (inputList) => {
 
 // Активность кнопки
 
+const buttonsSubmitActive = (buttonsSubmit) => {
+  buttonsSubmit.classList.remove(enableValidation.inactiveButtonClass);
+  buttonsSubmit.disabled = false;
+}
+
+const buttonsSubmitNoActive = (buttonsSubmit) => {
+  buttonsSubmit.classList.add(enableValidation.inactiveButtonClass);
+  buttonsSubmit.setAttribute("disabled", true);
+}
+
 const tooggleButtonState = (inputList, buttonsSubmit) => {
   if (hasInvalidInput(inputList)) {
-    buttonsSubmit.classList.add(enableValidation.inactiveButtonClass);
-    buttonsSubmit.setAttribute("disabled", true);
+    buttonsSubmitNoActive(buttonsSubmit);
   } else {
-    buttonsSubmit.classList.remove(enableValidation.inactiveButtonClass);
-    buttonsSubmit.setAttribute("disabled", false);
+    buttonsSubmitActive(buttonsSubmit);
   }
 };
 
