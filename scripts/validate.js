@@ -1,4 +1,4 @@
-const enableValidation = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save",
@@ -10,82 +10,82 @@ const enableValidation = {
 
 // Показ ошибки
 
-const showError = (formElement, inputElement, errorMessage) => {
+const showError = (formElement, inputElement, errorMessage, validationConfig) => {
   const errorELement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(enableValidation.inputErrorClass);
+  inputElement.classList.add(validationConfig.inputErrorClass);
   errorELement.textContent = errorMessage;
-  errorELement.classList.add(enableValidation.errorClass);
+  errorELement.classList.add(validationConfig.errorClass);
 };
 
 // Скрытие ошибки
 
-const hideError = (formElement, inputElement) => {
+const hideError = (formElement, inputElement, validationConfig) => {
   const errorELement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(enableValidation.inputErrorClass);
-  errorELement.classList.remove(enableValidation.errorClass);
+  inputElement.classList.remove(validationConfig.inputErrorClass);
+  errorELement.classList.remove(validationConfig.errorClass);
   errorELement.textContent = "";
 };
 
 // Проверка инпутов на валидность
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, validationConfig) => {
   if (!inputElement.validity.valid) {
-    showError(formElement, inputElement, inputElement.validationMessage);
+    showError(formElement, inputElement, inputElement.validationMessage, validationConfig);
   } else {
-    hideError(formElement, inputElement);
+    hideError(formElement, inputElement, validationConfig);
   }
 };
 
-const hasInvalidInput = (inputList) => {
+const hasInvalidInput = (inputList, validationConfig) => {
   return inputList.some((input) => !input.validity.valid);
 };
 
 // Активность кнопки
 
 const buttonsSubmitActive = (buttonsSubmit) => {
-  buttonsSubmit.classList.remove(enableValidation.inactiveButtonClass);
+  buttonsSubmit.classList.remove(validationConfig.inactiveButtonClass);
   buttonsSubmit.disabled = false;
 };
 
 const buttonsSubmitNoActive = (buttonsSubmit) => {
-  buttonsSubmit.classList.add(enableValidation.inactiveButtonClass);
+  buttonsSubmit.classList.add(validationConfig.inactiveButtonClass);
   buttonsSubmit.setAttribute("disabled", true);
 };
 
-const tooggleButtonState = (inputList, buttonsSubmit) => {
-  if (hasInvalidInput(inputList)) {
-    buttonsSubmitNoActive(buttonsSubmit);
+const tooggleButtonState = (inputList, buttonsSubmit, validationConfig) => {
+  if (hasInvalidInput(inputList, validationConfig)) {
+    buttonsSubmitNoActive(buttonsSubmit, validationConfig);
   } else {
-    buttonsSubmitActive(buttonsSubmit);
+    buttonsSubmitActive(buttonsSubmit, validationConfig);
   }
 };
 
 // Живая валидация
 
-const setEventListener = (formElement) => {
+const setEventListener = (formElement, validationConfig) => {
   const inputList = Array.from(
-    formElement.querySelectorAll(enableValidation.inputSelector)
+    formElement.querySelectorAll(validationConfig.inputSelector)
   );
   const buttonsSubmit = formElement.querySelector(
-    enableValidation.submitButtonSelector);
-  tooggleButtonState(inputList, buttonsSubmit);
+    validationConfig.submitButtonSelector);
+  tooggleButtonState(inputList, buttonsSubmit, validationConfig);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      tooggleButtonState(inputList, buttonsSubmit);
-      checkInputValidity(formElement, inputElement);
+      tooggleButtonState(inputList, buttonsSubmit, validationConfig);
+      checkInputValidity(formElement, inputElement, validationConfig);
     });
   });
 };
 
 // Функция создания массива всех форм
 
-function isValid() {
+function enableValidation (validationConfig) {
   const formList = Array.from(
-    document.querySelectorAll(enableValidation.formSelector)
+    document.querySelectorAll(validationConfig.formSelector)
   );
   formList.forEach((formElement) => {
-    setEventListener(formElement);
+    setEventListener(formElement, validationConfig);
   });
 };
 
-isValid();
+enableValidation (validationConfig);

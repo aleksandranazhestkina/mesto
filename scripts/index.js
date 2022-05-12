@@ -7,7 +7,7 @@ const formElementCard = document.querySelector("#card-form");
 
 const popupList = document.querySelector(".popup");
 const openPopupButton = document.querySelector(".profile__button-edit");
-const popupProfile = document.querySelector(".popup__profile")
+const popupProfile = document.querySelector(".popup_profile")
 const closeProfilePopup = document.querySelector(".popup__button-close_profile");
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
@@ -42,8 +42,8 @@ const closeImagePopup = document.querySelector(".popup__button-close_image");
 
 function openPopup(popupList) {
   popupList.classList.add("popup_opened");
-  document.addEventListener("keydown", heandleClosePopup);
-  document.addEventListener("click", heandleClosePopup);
+  document.addEventListener("keydown", hendleClosePopup);
+  document.addEventListener("click", hendleClosePopup);
 };
 
 // Открытие popup профиля и карточки
@@ -67,8 +67,8 @@ openNewCardButton.addEventListener("click", () => openPopupCard(buttonSaveCard))
 
 function closePopup(popupList) {
   popupList.classList.remove("popup_opened");
-  document.removeEventListener("keydown", heandleClosePopup);
-  document.addEventListener("click", heandleClosePopup);
+  document.removeEventListener("keydown", hendleClosePopup);
+  document.addEventListener("click", hendleClosePopup);
 };
 
 closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
@@ -77,7 +77,7 @@ closeCardPopup.addEventListener("click", () => closePopup(popupCard));
 
 // Функция закрытия попапа overlay и esc
 
-const heandleClosePopup = (evt) => {
+const hendleClosePopup = (evt) => {
   const popupOpened = document.querySelector('.popup_opened');
   if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
     closePopup(popupOpened);
