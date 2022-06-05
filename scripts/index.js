@@ -1,5 +1,7 @@
 import Card from "../scripts/Card.js";
+import FormValidator from "../scripts/FormValidator.js";
 import { initialCards } from "../scripts/Card.js";
+import { validationConfig } from "../scripts/FormValidator.js";
 // Переменные формы
 
 const popupProfileForm = document.querySelector("#profile-form");
@@ -18,8 +20,6 @@ const profileJob = document.querySelector(".profile__subtitle");
 
 const nameInput = document.querySelector("#profile-name");
 const jobInput = document.querySelector("#profile-about");
-const buttonSave = document.querySelector("#profile-submit");
-const buttonSaveCard = document.querySelector("#card-submit");
 
 // Переменные для открытия popup_card
 
@@ -43,8 +43,8 @@ const closeImagePopup = document.querySelector(".popup__button-close_image");
 
 function openPopup(popupList) {
   popupList.classList.add("popup_opened");
-  document.addEventListener("keydown", hendleClosePopup);
-  document.addEventListener("click", hendleClosePopup);
+  document.addEventListener("keydown", handleClosePopup);
+  document.addEventListener("click", handleClosePopup);
 };
 
 // Открытие popup профиля и карточки
@@ -53,23 +53,23 @@ function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  buttonsSubmitActive(buttonSave);
+  validateFormProfile.buttonsSubmitActive();
 };
 
-function openPopupCard(buttonSaveCard) {
+function openPopupCard() {
   openPopup(popupCard);
-  buttonsSubmitNoActive(buttonSaveCard);
+  validateFormCard.buttonsSubmitNoActive();
 };
 
 openPopupButton.addEventListener("click", () => openPopupProfile());
-openNewCardButton.addEventListener("click", () => openPopupCard(buttonSaveCard));
+openNewCardButton.addEventListener("click", () => openPopupCard());
 
 // Функция закрытия попапа
 
 function closePopup(popupList) {
   popupList.classList.remove("popup_opened");
-  document.removeEventListener("keydown", hendleClosePopup);
-  document.addEventListener("click", hendleClosePopup);
+  document.removeEventListener("keydown", handleClosePopup);
+  document.addEventListener("click", handleClosePopup);
 };
 
 closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
@@ -78,7 +78,7 @@ closeCardPopup.addEventListener("click", () => closePopup(popupCard));
 
 // Функция закрытия попапа overlay и esc
 
-const hendleClosePopup = (evt) => {
+const handleClosePopup = (evt) => {
   const popupOpened = document.querySelector('.popup_opened');
   if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
     closePopup(popupOpened);
@@ -128,3 +128,8 @@ function submitFormHandler(evt) {
 };
 
 popupProfileForm.addEventListener("submit", submitFormHandler);
+
+const validateFormProfile = new FormValidator (validationConfig, popupProfileForm);
+validateFormProfile.enableValidation();
+const validateFormCard = new FormValidator (validationConfig, formElementCard);
+validateFormCard.enableValidation();
