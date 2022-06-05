@@ -1,31 +1,6 @@
 import handleImagePopup from "../scripts/index.js";
+import { initialCards } from "../scripts/index.js"
 
-export const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 export default class Card {
   constructor(initialCards, cardSelector) {
@@ -45,22 +20,23 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._deleteButtonCard.closest(".elements__card").remove();
+    this._deleteButtonCard.this._element.remove();
+    this._element = null;
   }
 
   _handleLikeCard() {
     this._likeButtonCard.classList.toggle("elements__like_active");
   }
 
-  generateCard(initialCardsData) {
+  generateCard() {
     this._element = this._getTemplate();
     this._elementTitle = this._element.querySelector(".elements__title");
     this._elementImage = this._element.querySelector(".elements__image");
     this._deleteButtonCard = this._element.querySelector(".elements__basket");
     this._likeButtonCard = this._element.querySelector(".elements__like");
-    this._elementTitle.textContent = initialCardsData.name;
-    this._elementImage.src = initialCardsData.link;
-    this._elementImage.alt = initialCardsData.name;
+    this._elementTitle.textContent = this._name;
+    this._elementImage.src = this._link;
+    this._elementImage.alt = this._name;
 
     this._deleteButtonCard.addEventListener("click", () => {
       this._handleDeleteCard()

@@ -1,7 +1,43 @@
 import Card from "../scripts/Card.js";
 import FormValidator from "../scripts/FormValidator.js";
-import { initialCards } from "../scripts/Card.js";
-import { validationConfig } from "../scripts/FormValidator.js";
+
+export const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+
+  const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-save",
+  inactiveButtonClass: "popup__button-save_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "error_visible",
+  errorText: ".error"
+  };
+
 // Переменные формы
 
 const popupProfileForm = document.querySelector("#profile-form");
@@ -53,12 +89,12 @@ function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  validateFormProfile.buttonsSubmitActive();
+  validateFormProfile.buttonSubmitActive();
 };
 
 function openPopupCard() {
   openPopup(popupCard);
-  validateFormCard.buttonsSubmitNoActive();
+  validateFormCard.buttonSubmitNoActive();
 };
 
 openPopupButton.addEventListener("click", () => openPopupProfile());

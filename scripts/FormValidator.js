@@ -1,13 +1,3 @@
-export const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button-save",
-  inactiveButtonClass: "popup__button-save_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "error_visible",
-  errorText: ".error"
-};
-
 export default class FormValidator {
   constructor(obj, formElement) {
     this._formSelector = obj.formSelector;
@@ -24,9 +14,7 @@ export default class FormValidator {
   }
 
   enableValidation = () => {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
+    this._formElement.addEventListener("submit", () => {});
 
     this._setEventListener();
   }
@@ -47,30 +35,30 @@ export default class FormValidator {
     }
 
     // Активность кнопки
-    buttonsSubmitActive = () => {
+    buttonSubmitActive = () => {
       this._submitButtonElement.classList.remove(this._inactiveButtonClass);
       this._submitButtonElement.disabled = false;
     }
 
-    buttonsSubmitNoActive = () => {
+    buttonSubmitNoActive = () => {
       this._submitButtonElement.classList.add(this._inactiveButtonClass);
       this._submitButtonElement.setAttribute("disabled", true);
     }
 
-    tooggleButtonState = () => {
+    toggleButtonState = () => {
       if (this._hasInvalidInput()) {
-        this.buttonsSubmitNoActive();
+        this.buttonSubmitNoActive();
       } else {
-        this.buttonsSubmitActive();
+        this.buttonSubmitActive();
       }
     }
 
     // Живая валидация
     _setEventListener = () => {
-      this.tooggleButtonState();
+      this.toggleButtonState();
       this._listInputs.forEach((inputElement) => {
         inputElement.addEventListener("input", () => {
-          this.tooggleButtonState();
+          this.toggleButtonState();
           this._checkInputValidity(inputElement);
         });
       });
