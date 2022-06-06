@@ -1,7 +1,7 @@
 import Card from "../scripts/Card.js";
 import FormValidator from "../scripts/FormValidator.js";
 
-export const initialCards = [
+const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -28,7 +28,7 @@ export const initialCards = [
   },
 ];
 
-  const validationConfig = {
+const validationConfig = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button-save",
@@ -36,7 +36,7 @@ export const initialCards = [
   inputErrorClass: "popup__input_type_error",
   errorClass: "error_visible",
   errorText: ".error"
-  };
+};
 
 // Переменные формы
 
@@ -122,7 +122,7 @@ const handleClosePopup = (evt) => {
 }
 // Функция добавления данных в попап и его открытия
 
- export default function handleImagePopup(initialCardsData) {
+export default function handleImagePopup(initialCardsData) {
   elementPopupImage.src = initialCardsData.link;
   ImageTitle.textContent = initialCardsData.name;
   elementPopupImage.alt = initialCardsData.name;
@@ -136,7 +136,7 @@ const renderElementsCard = (elementsCardContainer, newCard) => {
 function createCard(initialCardsData) {
   const newCard = new Card(initialCardsData, "#elements__card-template", handleImagePopup);
   return newCard.generateCard(initialCardsData);
- }
+}
 
 initialCards.forEach((initialCardsData) => {
   const newCard = createCard(initialCardsData);
@@ -165,7 +165,7 @@ function submitFormHandler(evt) {
 
 popupProfileForm.addEventListener("submit", submitFormHandler);
 
-const validateFormProfile = new FormValidator (validationConfig, popupProfileForm);
+const validateFormProfile = new FormValidator(validationConfig, popupProfileForm);
 validateFormProfile.enableValidation();
-const validateFormCard = new FormValidator (validationConfig, formElementCard);
+const validateFormCard = new FormValidator(validationConfig, formElementCard);
 validateFormCard.enableValidation();

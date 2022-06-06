@@ -1,6 +1,4 @@
 import handleImagePopup from "../scripts/index.js";
-import { initialCards } from "../scripts/index.js"
-
 
 export default class Card {
   constructor(initialCards, cardSelector) {
@@ -20,7 +18,7 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    this._deleteButtonCard.this._element.remove();
+    this._element.remove();
     this._element = null;
   }
 
@@ -47,7 +45,7 @@ export default class Card {
     });
 
     this._elementImage.addEventListener("click", () => {
-      handleImagePopup(initialCardsData);
+      handleImagePopup(this);
     });
 
     return this._element;
