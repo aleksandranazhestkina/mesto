@@ -1,5 +1,3 @@
-
-
 export default class Card {
   constructor(data, cardSelector, handleImagePopup) {
     this._name = data.name;
