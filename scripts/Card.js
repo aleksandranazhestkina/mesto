@@ -45,7 +45,7 @@ export default class Card {
     });
 
     this._elementImage.addEventListener("click", () => {
-      handleImagePopup(this);
+      handleImagePopup(this._link, this._name);
     });
 
     return this._element;
