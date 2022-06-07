@@ -122,10 +122,10 @@ const handleClosePopup = (evt) => {
 }
 // Функция добавления данных в попап и его открытия
 
-export default function handleImagePopup(initialCardsData) {
-  elementPopupImage.src = initialCardsData.link;
-  ImageTitle.textContent = initialCardsData.name;
-  elementPopupImage.alt = initialCardsData.name;
+ function handleImagePopup(link, name) {
+  elementPopupImage.src = link;
+  ImageTitle.textContent = name;
+  elementPopupImage.alt = name;
   openPopup(popupImage);
 };
 

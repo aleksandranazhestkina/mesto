@@ -1,10 +1,11 @@
-import handleImagePopup from "../scripts/index.js";
+
 
 export default class Card {
-  constructor(initialCards, cardSelector) {
-    this._name = initialCards.name;
-    this._link = initialCards.link;
+  constructor(data, cardSelector, handleImagePopup) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleImagePopup = handleImagePopup;
   }
 
   _getTemplate() {
@@ -45,7 +46,7 @@ export default class Card {
     });
 
     this._elementImage.addEventListener("click", () => {
-      handleImagePopup(this._link, this._name);
+      this._handleImagePopup(this._link, this._name);
     });
 
     return this._element;
