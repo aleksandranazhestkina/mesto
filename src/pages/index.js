@@ -1,6 +1,8 @@
 import Card from "../scripts/components/Card.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
+import Popup from "../scripts/components/Popup.js";
+import 
 import {
   initialCards,
   validationConfig,
@@ -28,11 +30,11 @@ import {
 
 // Функция открытия попапа
 
-function openPopup(popupList) {
-  popupList.classList.add("popup_opened");
-  document.addEventListener("keydown", handleClosePopup);
-  document.addEventListener("click", handleClosePopup);
-};
+// function openPopup(popupList) {
+//   popupList.classList.add("popup_opened");
+//   document.addEventListener("keydown", handleClosePopup);
+//   document.addEventListener("click", handleClosePopup);
+// };
 
 // Открытие popup профиля и карточки
 
@@ -53,24 +55,24 @@ openNewCardButton.addEventListener("click", () => openPopupCard());
 
 // Функция закрытия попапа
 
-function closePopup(popupList) {
-  popupList.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleClosePopup);
-  document.addEventListener("click", handleClosePopup);
-};
+// function closePopup(popupList) {
+//   popupList.classList.remove("popup_opened");
+//   document.removeEventListener("keydown", handleClosePopup);
+//   document.addEventListener("click", handleClosePopup);
+// };
 
 closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
 closeImagePopup.addEventListener("click", () => closePopup(popupImage));
 closeCardPopup.addEventListener("click", () => closePopup(popupCard));
 
-// Функция закрытия попапа overlay и esc
+// // Функция закрытия попапа overlay и esc
 
-const handleClosePopup = (evt) => {
-  const popupOpened = document.querySelector('.popup_opened');
-  if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
-    closePopup(popupOpened);
-  }
-}
+// const handleClosePopup = (evt) => {
+//   const popupOpened = document.querySelector('.popup_opened');
+//   if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
+//     closePopup(popupOpened);
+//   }
+// }
 // Функция добавления данных в попап и его открытия
 
 function handleImagePopup(link, name) {
@@ -80,7 +82,7 @@ function handleImagePopup(link, name) {
   openPopup(popupImage);
 };
 
-// добавление изначальных карточек
+// Добавление изначальных карточек
 const cardList = new Section({
   items: initialCards,
   renderer: (cardItem) => {
@@ -92,24 +94,11 @@ const cardList = new Section({
 elementsCardContainer);
 cardList.renderItems();
 
-// Создание карточки
-
-// const createCard = (initialCardsData) => {
-//   const newCard = new Card(initialCardsData, "#elements__card-template", handleImagePopup);
-//   cardList.addItem(initialCardsData);
-//   return newCard.generateCard(initialCardsData);
-// }
-
-// initialCards.forEach((initialCardsData) => {
-//   const newCard = createCard(initialCardsData);
-
-// });
-
 // Функция submit карточки
 
 const handleFormSubmitCard = (event) => {
   event.preventDefault();
-  cardList.addItem(element, createCard({ name: nameInputCard.value, link: aboutInputCard.value }));
+  cardList.addItem({ name: nameInputCard.value, link: aboutInputCard.value });
   closePopup(popupCard);
   event.target.reset();
 };
@@ -132,3 +121,12 @@ validateFormProfile.enableValidation();
 const validateFormCard = new FormValidator(validationConfig, formElementCard);
 validateFormCard.enableValidation();
 
+// Создание карточки
+// const createCard = (initialCardsData) => {
+//   const newCard = new Card(initialCardsData, "#elements__card-template", handleImagePopup);
+//   cardList.addItem(initialCardsData);
+//   return newCard.generateCard(initialCardsData);
+// }
+// initialCards.forEach((initialCardsData) => {
+//   const newCard = createCard(initialCardsData);
+// });
