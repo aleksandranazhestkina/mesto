@@ -1,6 +1,6 @@
-import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
-import Section from "../components/Section.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
 import {
   initialCards,
   validationConfig,
@@ -24,7 +24,7 @@ import {
   elementPopupImage,
   ImageTitle,
   closeImagePopup
-} from "../utils/constants.js";
+} from "../scripts/utils/constants.js";
 
 // Функция открытия попапа
 
