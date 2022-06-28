@@ -3,6 +3,7 @@ import FormValidator from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import { UserInfo } from "../scripts/components/UserInfo.js";
 
 import {
   initialCards,
@@ -31,23 +32,23 @@ import {
 
 // Функция открытия попапа
 
-function openPopup(popupList) {
-  popupList.classList.add("popup_opened");
-  document.addEventListener("keydown", handleClosePopup);
-  document.addEventListener("click", handleClosePopup);
-};
+// function openPopup(popupList) {
+//   popupList.classList.add("popup_opened");
+//   document.addEventListener("keydown", handleClosePopup);
+//   document.addEventListener("click", handleClosePopup);
+// };
 
 // Открытие popup профиля и карточки
 
 function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  openPopup(popupProfile);
+  editProfilePopup.open();
   validateFormProfile.buttonSubmitActive();
 };
 
 function openPopupCard() {
-  openPopup(popupCard);
+  addCardPopup.open();
   validateFormCard.buttonSubmitNoActive();
 };
 
@@ -56,44 +57,34 @@ openNewCardButton.addEventListener("click", () => openPopupCard());
 
 // Функция закрытия попапа
 
-function closePopup(popupList) {
-  popupList.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleClosePopup);
-  document.addEventListener("click", handleClosePopup);
-};
+// function closePopup(popupList) {
+//   popupList.classList.remove("popup_opened");
+//   document.removeEventListener("keydown", handleClosePopup);
+//   document.addEventListener("click", handleClosePopup);
+// };
 
-closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
-// closeImagePopup.addEventListener("click", () => closePopup(popupImage));
-closeCardPopup.addEventListener("click", () => closePopup(popupCard));
+// closeProfilePopup.addEventListener("click", () => closePopup(popupProfile));
+// closeCardPopup.addEventListener("click", () => closePopup(popupCard));
 
 // Функция закрытия попапа overlay и esc
 
-const handleClosePopup = (evt) => {
-  const popupOpened = document.querySelector('.popup_opened');
-  if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
-    closePopup(popupOpened);
-  }
-}
-// Функция добавления данных в попап и его открытия
-
-//  function handleImagePopup(link, name) {
-//   elementPopupImage.src = link;
-//   ImageTitle.textContent = name;
-//   elementPopupImage.alt = name;
-//   openPopup(popupImage);
-// };
+// const handleClosePopup = (evt) => {
+//   const popupOpened = document.querySelector('.popup_opened');
+//   if ((popupOpened && evt.key === 'Escape') || evt.target === popupOpened) {
+//     closePopup(popupOpened);
+//   }
+// }
 
 // Функция submit карточки
 
-const handleFormSubmitCard = (event) => {
-  event.preventDefault();
+const handleFormSubmitCard = (evt) => {
+  evt.preventDefault();
   const card = createCard({
      name: nameInputCard.value,
      link: aboutInputCard.value
     });
   cardList.addItem(card);
-  closePopup(popupCard);
-  event.target.reset();
+  addCardPopup.close();
 };
 
 formElementCard.addEventListener("submit", handleFormSubmitCard);
@@ -121,28 +112,34 @@ cardList.renderItems();
 
 // Функция submit профиль
 
-function submitFormHandler(evt) {
+function submitProfileFormHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(popupProfile);
+  editProfilePopup.close()
 };
 
-popupProfileForm.addEventListener("submit", submitFormHandler);
+popupProfileForm.addEventListener("submit", submitProfileFormHandler);
+// Создание классов валидации
 
 const validateFormProfile = new FormValidator(validationConfig, popupProfileForm);
 validateFormProfile.enableValidation();
+
 const validateFormCard = new FormValidator(validationConfig, formElementCard);
 validateFormCard.enableValidation();
 
-const popupWithImage = new PopupWithImage(".popup_image");
+// Создание классов попапов с формами
 
+const popupWithImage = new PopupWithImage(".popup_image");
 popupWithImage.setEventListeners();
 
+const editProfilePopup = new PopupWithForm("#profile-form", submitProfileFormHandler);
+editProfilePopup.setEventListeners();
 
+const addCardPopup = new PopupWithForm("#card-form", handleFormSubmitCard);
+addCardPopup.setEventListeners();
 
-
-
+const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle"})
 
 
 
