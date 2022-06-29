@@ -1,0 +1,22 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "![alt-screenshot](/images/Screenshot1.png)\r ### Обзор\r - [Описание](#Описание)\r - [С чего начать](#С_чего_начать)\r - [Языки](#Языки)\r ------------------",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksandranazhestkina/mesto.git"
+  },
+  "keywords": [
+    "mesto"
+  ],
+  "author": "Aleksandra Nazhestkina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksandranazhestkina/mesto/issues"
+  },
+  "homepage": "https://github.com/aleksandranazhestkina/mesto#readme"
+}
