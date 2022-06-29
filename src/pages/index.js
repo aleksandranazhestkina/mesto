@@ -74,8 +74,9 @@ cardList.renderItems();
 
 const submitProfileFormHandler = (data) => {
   const { name, job } = data;
-  profileName.textContent = name;
-  profileJob.textContent = job;
+  // profileName.textContent = name;
+  // profileJob.textContent = job;
+  userInfo.setUserInfo(name, job)
   editProfilePopup.close();
 };
 
@@ -101,8 +102,9 @@ addCardPopup.setEventListeners();
 const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle"});
 
 openPopupButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  const {name, job} = userInfo.getUserInfo()
+  nameInput.value = name;
+  jobInput.value = job;
   editProfilePopup.open();
   validateFormProfile.buttonSubmitActive();
 });
