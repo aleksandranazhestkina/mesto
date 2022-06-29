@@ -68,7 +68,6 @@ const handleFormSubmitCard = () => {
   cardList.addItem(card);
   addCardPopup.close();
 };
-
 // formElementCard.addEventListener("submit", handleFormSubmitCard);
 
 // Создание новой карточки
