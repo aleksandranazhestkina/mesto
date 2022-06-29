@@ -48,7 +48,7 @@ export const popupProfile = document.querySelector(".popup_profile")
 export const closeProfilePopup = document.querySelector(".popup__button-close_profile");
 export const profileName = document.querySelector(".profile__title");
 export const profileJob = document.querySelector(".profile__subtitle");
-
+export const ESC_KEYCODE = 27;
 // Переменные input
 
 export const nameInput = document.querySelector("#profile-name");
