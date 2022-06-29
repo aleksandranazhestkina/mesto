@@ -31,7 +31,6 @@ openNewCardButton.addEventListener("click", () => {
 // Функция submit карточки
 
 const handleFormSubmitCard = (data) => {
-
   const card = createCard({
      name: data["title"],
      link: data["image"]
