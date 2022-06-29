@@ -10,24 +10,12 @@ import {
   validationConfig,
   popupProfileForm,
   formElementCard,
-  popupList,
   openPopupButton,
-  popupProfile,
-  closeProfilePopup,
-  profileName,
-  profileJob,
   nameInput,
   jobInput,
   openNewCardButton,
-  popupCard,
-  closeCardPopup,
   elementsCardContainer,
-  nameInputCard,
-  aboutInputCard,
-  popupImage,
-  elementPopupImage,
-  ImageTitle,
-  closeImagePopup
+
 } from "../scripts/utils/constants.js";
 
 // Открытие popup профиля и карточки

@@ -42,13 +42,9 @@ export const formElementCard = document.querySelector("#card-form");
 
 // Переменные для работы с popup в профиле
 
-export const popupList = document.querySelector(".popup");
 export const openPopupButton = document.querySelector(".profile__button-edit");
-export const popupProfile = document.querySelector(".popup_profile")
-export const closeProfilePopup = document.querySelector(".popup__button-close_profile");
-export const profileName = document.querySelector(".profile__title");
-export const profileJob = document.querySelector(".profile__subtitle");
 export const ESC_KEYCODE = 27;
+
 // Переменные input
 
 export const nameInput = document.querySelector("#profile-name");
@@ -57,17 +53,6 @@ export const jobInput = document.querySelector("#profile-about");
 // Переменные для открытия popup_card
 
 export const openNewCardButton = document.querySelector(".profile__button-add");
-export const popupCard = document.querySelector(".popup_card");
-export const closeCardPopup = popupCard.querySelector(".popup__button-close_card");
 
 // Переменные формы карточек
 export const elementsCardContainer = document.querySelector(".elements__cards");
-export const nameInputCard = document.querySelector("#card-name");
-export const aboutInputCard = document.querySelector("#card-link");
-
-// Переменные для открытия popup_image
-
-export const popupImage = document.querySelector(".popup_image");
-export const elementPopupImage = document.querySelector(".popup__card-image");
-export const ImageTitle = document.querySelector(".popup__subtitle");
-export const closeImagePopup = document.querySelector(".popup__button-close_image");
