@@ -30,45 +30,24 @@ import {
   closeImagePopup
 } from "../scripts/utils/constants.js";
 
-// Функция открытия попапа
-
-// function openPopup(popupList) {
-//   popupList.classList.add("popup_opened");
-// };
-
 // Открытие popup профиля и карточки
-
-
 
 openNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
   validateFormCard.buttonSubmitNoActive();
 });
 
-// Функция закрытия попапа
-
-// function closePopup(popupList) {
-//   popupList.classList.remove("popup_opened");
-//   document.removeEventListener("keydown", handleClosePopup);
-//   document.addEventListener("click", handleClosePopup);
-// };
-
-// closeProfilePopup.addEventListener("click", () => editProfilePopup.close());
-// closeCardPopup.addEventListener("click", () => addCardPopup.close());
-
-
 // Функция submit карточки
 
-const handleFormSubmitCard = () => {
+const handleFormSubmitCard = (data) => {
 
   const card = createCard({
-     name: nameInputCard.value,
-     link: aboutInputCard.value
+     name: data["title"],
+     link: data["image"]
     });
   cardList.addItem(card);
   addCardPopup.close();
 };
-// formElementCard.addEventListener("submit", handleFormSubmitCard);
 
 // Создание новой карточки
 
@@ -93,13 +72,12 @@ cardList.renderItems();
 
 // Функция submit профиль
 
-const submitProfileFormHandler = () => {
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
+const submitProfileFormHandler = (data) => {
+  const { name, job } = data;
+  profileName.textContent = name;
+  profileJob.textContent = job;
   editProfilePopup.close();
 };
-
-// popupProfileForm.addEventListener("submit", submitProfileFormHandler);
 
 // Создание классов валидации
 
@@ -121,7 +99,6 @@ const addCardPopup = new PopupWithForm(".popup_card", handleFormSubmitCard);
 addCardPopup.setEventListeners();
 
 const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle"});
-
 
 openPopupButton.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
