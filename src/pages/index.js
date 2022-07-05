@@ -1,12 +1,12 @@
 import './index.css';
 
-
 import Card from "../scripts/components/Card.js";
 import FormValidator from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
+import Api from "../scripts/components/Api.js";
 
 import {
   initialCards,
@@ -20,6 +20,32 @@ import {
   elementsCardContainer,
 
 } from "../scripts/utils/constants.js";
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-44/',
+  token: 'd2530845-e697-44f9-b4fb-404b485e2dca',
+  'Content-Type': 'application/json'
+});
+
+// Добавление карточек и данных пользователя
+
+let userId = null;
+
+api.getUserInfo()
+  .then((data) => {
+    userId = data._id;
+    userInfo.setUserInfo(data.name, data.about);
+    userInfo.setUserAvatar(data);
+  })
+  .catch(err => console.log(err))
+
+api.getInitialCards()
+  .then((initialArray) => {
+    cardList.renderItems(initialArray);
+  })
+  .catch(err => console.log(err))
+
+
 
 // Открытие popup профиля и карточки
 
@@ -58,15 +84,18 @@ const cardList = new Section({
   }
 },
 elementsCardContainer);
-cardList.renderItems();
+
 
 // Функция submit профиль
 
 const submitProfileFormHandler = (data) => {
-  const { name, job } = data;
-  // profileName.textContent = name;
-  // profileJob.textContent = job;
-  userInfo.setUserInfo(name, job)
+  // const { name, job } = data;
+  api.editProfile(data)
+  .then((res) => {
+    userInfo.setUserInfo(res.name, res.about)
+  })
+  .catch(err => console.log(err))
+  // userInfo.setUserInfo(name, job)
   editProfilePopup.close();
 };
 
@@ -89,12 +118,13 @@ editProfilePopup.setEventListeners();
 const addCardPopup = new PopupWithForm(".popup_card", handleFormSubmitCard);
 addCardPopup.setEventListeners();
 
-const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle"});
+const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle", profileAvatar: ".profile__avatar"});
 
 openPopupButton.addEventListener("click", () => {
   const {name, job} = userInfo.getUserInfo()
   nameInput.value = name;
   jobInput.value = job;
   editProfilePopup.open();
+
   validateFormProfile.buttonSubmitActive();
 });
