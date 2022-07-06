@@ -58,4 +58,6 @@ export default class Api {
       })
     }).then((res) => this._resultRequest(res));
   }
+
+  
 }

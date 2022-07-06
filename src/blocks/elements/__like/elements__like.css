@@ -5,7 +5,7 @@
   border: none;
   width: 22px;
   height: 19px;
-  padding-right: 30px;
+  /* padding-right: 30px; */
   cursor: pointer;
   transform: opacity 0.4s;
 }
