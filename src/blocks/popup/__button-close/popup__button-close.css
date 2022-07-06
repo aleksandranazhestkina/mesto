@@ -9,9 +9,8 @@
   color: rgb(255, 255, 255);
   cursor: pointer;
   transform: opacity 0.4s;
-  position: relative;
-  top: -8px;
-  right: -40px;
+  align-self: flex-end;
+  transform: translate(40px, -20px);
 }
 
 .popup__button-close:hover {
@@ -23,7 +22,6 @@
     background-image: url(../../../images/CloseIconMobile.svg);
     width: 20px;
     height: 20px;
-    top: -16px;
-    right: 0;
+    transform: translate(0, -20px);
   }
 }

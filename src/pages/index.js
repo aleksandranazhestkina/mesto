@@ -7,6 +7,7 @@ import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
+import Popup from '../scripts/components/Popup';
 
 import {
   validationConfig,
@@ -75,6 +76,13 @@ const handleFormSubmitCard = (data) => {
 const createCard = (cardItem) => {
   const newCard = new Card(cardItem, "#elements__card-template", () => {
     popupWithImage.open(cardItem.link, cardItem.name)
+  },
+
+  function handleDeleteIconCard() {
+    confirmDelete.open();
+    // confirmDelete.setSubmitAction(() => {
+
+    // })
   });
   return newCard.generateCard();
 };
@@ -119,6 +127,9 @@ editProfilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(".popup_card", handleFormSubmitCard);
 addCardPopup.setEventListeners();
+
+const confirmDelete = new Popup(".popup__delete");
+confirmDelete.setEventListeners();
 
 const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle", profileAvatar: ".profile__avatar"});
 
