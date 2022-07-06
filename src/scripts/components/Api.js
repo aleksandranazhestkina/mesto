@@ -44,4 +44,18 @@ export default class Api {
       })
     }).then((res) => this._resultRequest(res));
   }
+
+  addNewCard(data) {
+    return fetch(`${this._url}cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    }).then((res) => this._resultRequest(res));
+  }
 }

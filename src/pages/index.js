@@ -9,7 +9,6 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
 
 import {
-  initialCards,
   validationConfig,
   popupProfileForm,
   formElementCard,
@@ -39,13 +38,14 @@ api.getUserInfo()
   })
   .catch(err => console.log(err))
 
+let defaultCards = null;
+
 api.getInitialCards()
-  .then((initialArray) => {
-    cardList.renderItems(initialArray);
+  .then((items) => {
+    defaultCards = items;
+    cardList.renderItems(items);
   })
   .catch(err => console.log(err))
-
-
 
 // Открытие popup профиля и карточки
 
@@ -55,14 +55,19 @@ openNewCardButton.addEventListener("click", () => {
 });
 
 // Функция submit карточки
-
+let card = null
 const handleFormSubmitCard = (data) => {
-  const card = createCard({
-     name: data["title"],
-     link: data["image"]
-    });
-  cardList.addItem(card);
-  addCardPopup.close();
+    card = {
+    name: data["title"],
+    link: data["image"]
+   };
+
+  api.addNewCard(card)
+  .then((data) => {
+    cardList.addItem(createCard(data));
+    addCardPopup.close();
+  })
+  .catch(err => console.log(err))
 };
 
 // Создание новой карточки
@@ -77,7 +82,6 @@ const createCard = (cardItem) => {
 // Добавление дефолтных карточек
 
 const cardList = new Section({
-  items: initialCards,
   renderer: (cardItem) => {
     const card = createCard(cardItem)
     cardList.addItem(card);
@@ -89,13 +93,11 @@ elementsCardContainer);
 // Функция submit профиль
 
 const submitProfileFormHandler = (data) => {
-  // const { name, job } = data;
   api.editProfile(data)
   .then((res) => {
     userInfo.setUserInfo(res.name, res.about)
   })
   .catch(err => console.log(err))
-  // userInfo.setUserInfo(name, job)
   editProfilePopup.close();
 };
 
@@ -125,6 +127,5 @@ openPopupButton.addEventListener("click", () => {
   nameInput.value = name;
   jobInput.value = job;
   editProfilePopup.open();
-
   validateFormProfile.buttonSubmitActive();
 });
