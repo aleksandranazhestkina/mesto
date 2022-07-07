@@ -10,6 +10,7 @@
   right: 20px;
   cursor: pointer;
   transform: opacity 0.4s;
+  visibility: hidden;
 }
 
 .elements__basket:hover {

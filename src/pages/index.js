@@ -74,7 +74,7 @@ const handleFormSubmitCard = (data) => {
 // Создание новой карточки
 
 const createCard = (cardItem) => {
-  const newCard = new Card(cardItem, "#elements__card-template", () => {
+  const newCard = new Card(cardItem, userId, "#elements__card-template", () => {
     popupWithImage.open(cardItem.link, cardItem.name)
   },
 
