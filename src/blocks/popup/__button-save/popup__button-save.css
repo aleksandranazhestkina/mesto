@@ -10,6 +10,8 @@
   border: 0;
   cursor: pointer;
   transform: opacity 0.4s;
+  min-width: 358px;
+  margin-left: 36px;
 }
 
 .popup__button-save:hover {
@@ -22,5 +24,7 @@
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 25px;
+    min-width: 200px;
+    margin-left: 20px;
   }
 }

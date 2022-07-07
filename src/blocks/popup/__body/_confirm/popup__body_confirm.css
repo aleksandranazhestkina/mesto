@@ -1,7 +1,6 @@
 .popup__body_confirm {
   min-width: 430px;
   max-height: 181px;
-  justify-content: center;
 }
 
 @media screen and (max-width: 900px) {

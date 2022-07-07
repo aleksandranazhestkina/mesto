@@ -13,11 +13,15 @@ import {
   validationConfig,
   popupProfileForm,
   formElementCard,
+  avatarForm,
+  avatarInput,
   openPopupButton,
   nameInput,
   jobInput,
   openNewCardButton,
   elementsCardContainer,
+  avatarButton,
+  avatarImage
 
 } from "../scripts/utils/constants.js";
 
@@ -48,12 +52,18 @@ api.getInitialCards()
   })
   .catch(err => console.log(err))
 
-// Открытие popup профиля и карточки
+// Открытие popup карточки
 
 openNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
   validateFormCard.buttonSubmitNoActive();
 });
+
+avatarButton.addEventListener("click", () => {
+  editAvatarPopup.open();
+  validateFormAvatar.buttonSubmitNoActive();
+});
+
 
 // Функция submit карточки
 let card = null
@@ -80,12 +90,14 @@ const createCard = (cardItem) => {
   return newCard.generateCard();
 };
 
-  function handleDeleteIconCard () {
+// Удаление карточки
+
+  function handleDeleteIconCard(card) {
     confirmDelete.open();
     confirmDelete.setSubmitAction(() => {
-      api.deleteCard(this.getId())
+      api.deleteCard(card.getId())
       .then(() => {
-        this.handleDeleteCard(this);
+        this.handleDeleteCard(card);
         confirmDelete.close();
       })
       .catch(err => console.log(err))
@@ -114,6 +126,16 @@ const submitProfileFormHandler = (data) => {
   editProfilePopup.close();
 };
 
+// Функция submit аватар
+
+const handleAvatarSubmit = (link) => {
+  api.editAvatar(link)
+  .then((res) => {
+    userInfo.setUserAvatar(res)
+    editAvatarPopup.close()
+  }).catch(err => console.log(err))
+}
+
 // Создание классов валидации
 
 const validateFormProfile = new FormValidator(validationConfig, popupProfileForm);
@@ -121,6 +143,9 @@ validateFormProfile.enableValidation();
 
 const validateFormCard = new FormValidator(validationConfig, formElementCard);
 validateFormCard.enableValidation();
+
+const validateFormAvatar = new FormValidator(validationConfig, avatarForm);
+validateFormAvatar.enableValidation();
 
 // Создание классов попапов с формами
 
@@ -132,6 +157,9 @@ editProfilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(".popup_card", handleFormSubmitCard);
 addCardPopup.setEventListeners();
+
+const editAvatarPopup = new PopupWithForm(".popup_avatar", handleAvatarSubmit);
+editAvatarPopup.setEventListeners()
 
 const confirmDelete = new PopupConfirm(".popup_delete");
 confirmDelete.setEventListeners();

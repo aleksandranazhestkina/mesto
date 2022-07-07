@@ -39,6 +39,7 @@ export const validationConfig = {
 
 export const popupProfileForm = document.querySelector("#profile-form");
 export const formElementCard = document.querySelector("#card-form");
+export const avatarForm = document.querySelector("#avatar-form");
 
 // Переменные для работы с popup в профиле
 
@@ -49,6 +50,7 @@ export const ESC_KEYCODE = 27;
 
 export const nameInput = document.querySelector("#profile-name");
 export const jobInput = document.querySelector("#profile-about");
+export const avatarInput = document.querySelector("#avatar");
 
 // Переменные для открытия popup_card
 
@@ -56,3 +58,7 @@ export const openNewCardButton = document.querySelector(".profile__button-add");
 
 // Переменные формы карточек
 export const elementsCardContainer = document.querySelector(".elements__cards");
+
+export const avatarButton = document.querySelector(".profile__button-avatar");
+
+export const avatarImage = document.querySelector(".profile__avatar")
