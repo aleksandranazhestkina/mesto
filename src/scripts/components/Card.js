@@ -22,7 +22,7 @@ export default class Card {
     return elementTemplate;
   }
 
-  _handleDeleteCard() {
+  handleDeleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -40,7 +40,10 @@ export default class Card {
       this._deleteButtonCard
       .classList.add("elements__basket_visible");
     }
+  }
 
+  getId() {
+    return this._cardId;
   }
 
   generateCard() {
@@ -56,8 +59,7 @@ export default class Card {
     this.handleDelCardVisible();
 
     this._deleteButtonCard.addEventListener("click", () => {
-      this._handleDeleteCard();
-      this._handleDeleteIconCard();
+      this._handleDeleteIconCard(this);
     });
 
     this._likeButtonCard.addEventListener("click", () => {

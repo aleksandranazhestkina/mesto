@@ -7,7 +7,7 @@ import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
-import Popup from '../scripts/components/Popup';
+import PopupConfirm from '../scripts/components/PopupConfirm';
 
 import {
   validationConfig,
@@ -76,16 +76,21 @@ const handleFormSubmitCard = (data) => {
 const createCard = (cardItem) => {
   const newCard = new Card(cardItem, userId, "#elements__card-template", () => {
     popupWithImage.open(cardItem.link, cardItem.name)
-  },
-
-  function handleDeleteIconCard() {
-    confirmDelete.open();
-    // confirmDelete.setSubmitAction(() => {
-
-    // })
-  });
+  },handleDeleteIconCard)
   return newCard.generateCard();
 };
+
+  function handleDeleteIconCard () {
+    confirmDelete.open();
+    confirmDelete.setSubmitAction(() => {
+      api.deleteCard(this.getId())
+      .then(() => {
+        this.handleDeleteCard(this);
+        confirmDelete.close();
+      })
+      .catch(err => console.log(err))
+   })
+  }
 
 // Добавление дефолтных карточек
 
@@ -128,7 +133,7 @@ editProfilePopup.setEventListeners();
 const addCardPopup = new PopupWithForm(".popup_card", handleFormSubmitCard);
 addCardPopup.setEventListeners();
 
-const confirmDelete = new Popup(".popup__delete");
+const confirmDelete = new PopupConfirm(".popup_delete");
 confirmDelete.setEventListeners();
 
 const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle", profileAvatar: ".profile__avatar"});
