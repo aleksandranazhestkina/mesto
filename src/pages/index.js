@@ -14,14 +14,12 @@ import {
   popupProfileForm,
   formElementCard,
   avatarForm,
-  avatarInput,
   openPopupButton,
   nameInput,
   jobInput,
   openNewCardButton,
   elementsCardContainer,
-  avatarButton,
-  avatarImage
+  avatarButton
 
 } from "../scripts/utils/constants.js";
 
@@ -59,11 +57,12 @@ openNewCardButton.addEventListener("click", () => {
   validateFormCard.buttonSubmitNoActive();
 });
 
+// Открытие попава аватара
+
 avatarButton.addEventListener("click", () => {
   editAvatarPopup.open();
   validateFormAvatar.buttonSubmitNoActive();
 });
-
 
 // Функция submit карточки
 let card = null
@@ -72,13 +71,16 @@ const handleFormSubmitCard = (data) => {
     name: data["title"],
     link: data["image"]
    };
-
+   addCardPopup.renderLoading(true);
   api.addNewCard(card)
   .then((data) => {
     cardList.addItem(createCard(data));
     addCardPopup.close();
   })
   .catch(err => console.log(err))
+  .finally(() => {
+    addCardPopup.renderLoading(false);
+  })
 };
 
 // Создание новой карточки
@@ -86,9 +88,18 @@ const handleFormSubmitCard = (data) => {
 const createCard = (cardItem) => {
   const newCard = new Card(cardItem, userId, "#elements__card-template", () => {
     popupWithImage.open(cardItem.link, cardItem.name)
-  },handleDeleteIconCard)
+  },handleDeleteIconCard, addLikeCard, deleteLikeCard)
   return newCard.generateCard();
 };
+
+function addLikeCard (card) {
+  return api.addLike(card)
+}
+
+function deleteLikeCard (card) {
+  return api.deleteLike(card)
+}
+
 
 // Удаление карточки
 
@@ -118,22 +129,30 @@ elementsCardContainer);
 // Функция submit профиль
 
 const submitProfileFormHandler = (data) => {
+  editProfilePopup.renderLoading(true);
   api.editProfile(data)
   .then((res) => {
     userInfo.setUserInfo(res.name, res.about)
   })
   .catch(err => console.log(err))
-  editProfilePopup.close();
+  editProfilePopup.close()
+  .finally(() => {
+    editProfilePopup.renderLoading(false)
+  })
 };
 
 // Функция submit аватар
 
 const handleAvatarSubmit = (link) => {
+  editAvatarPopup.renderLoading(true)
   api.editAvatar(link)
   .then((res) => {
     userInfo.setUserAvatar(res)
     editAvatarPopup.close()
   }).catch(err => console.log(err))
+  .finally(() => {
+    editAvatarPopup.renderLoading(false)
+  })
 }
 
 // Создание классов валидации

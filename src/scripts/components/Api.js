@@ -80,4 +80,22 @@ export default class Api {
       })
     }).then((res) => this._resultRequest(res));
   }
+
+  addLike(id) {
+    return fetch(`${this._url}cards/${id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+      }
+    }).then((res) => this._resultRequest(res));
+  }
+
+  deleteLike(id) {
+    return fetch(`${this._url}cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+      }
+    }).then((res) => this._resultRequest(res));
+  }
 }
