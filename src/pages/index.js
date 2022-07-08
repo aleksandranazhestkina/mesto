@@ -1,13 +1,13 @@
 import './index.css';
 
-import Card from "../scripts/components/Card.js";
-import FormValidator from "../scripts/components/FormValidator.js";
-import Section from "../scripts/components/Section.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
-import { UserInfo } from "../scripts/components/UserInfo.js";
-import Api from "../scripts/components/Api.js";
-import PopupConfirm from '../scripts/components/PopupConfirm';
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+import Api from "../components/Api.js";
+import PopupConfirm from '../components/PopupConfirm';
 
 import {
   validationConfig,
@@ -21,7 +21,7 @@ import {
   elementsCardContainer,
   avatarButton
 
-} from "../scripts/utils/constants.js";
+} from "../utils/constants.js";
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-44/',
@@ -30,22 +30,13 @@ const api = new Api({
 });
 
 // Добавление карточек и данных пользователя
-
 let userId = null;
 
-api.getUserInfo()
-  .then((data) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, items]) => {
     userId = data._id;
     userInfo.setUserInfo(data.name, data.about);
     userInfo.setUserAvatar(data);
-  })
-  .catch(err => console.log(err))
-
-let defaultCards = null;
-
-api.getInitialCards()
-  .then((items) => {
-    defaultCards = items;
     cardList.renderItems(items);
   })
   .catch(err => console.log(err))
@@ -65,22 +56,22 @@ avatarButton.addEventListener("click", () => {
 });
 
 // Функция submit карточки
-let card = null
+
 const handleFormSubmitCard = (data) => {
-    card = {
-    name: data["title"],
-    link: data["image"]
-   };
-   addCardPopup.renderLoading(true);
+  let card = {
+    name: data.title,
+    link: data.image
+  };
+  addCardPopup.renderLoading(true);
   api.addNewCard(card)
-  .then((data) => {
-    cardList.addItem(createCard(data));
-    addCardPopup.close();
-  })
-  .catch(err => console.log(err))
-  .finally(() => {
-    addCardPopup.renderLoading(false);
-  })
+    .then((data) => {
+      cardList.addItem(createCard(data));
+      addCardPopup.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      addCardPopup.renderLoading(false);
+    })
 };
 
 // Создание новой карточки
@@ -88,32 +79,39 @@ const handleFormSubmitCard = (data) => {
 const createCard = (cardItem) => {
   const newCard = new Card(cardItem, userId, "#elements__card-template", () => {
     popupWithImage.open(cardItem.link, cardItem.name)
-  },handleDeleteIconCard, addLikeCard, deleteLikeCard)
+  }, handleDeleteIconCard, addLikeCard, deleteLikeCard)
   return newCard.generateCard();
 };
 
-function addLikeCard (card) {
-  return api.addLike(card)
+function addLikeCard(card) {
+  return api.addLike(card.getId())
+    .then((data) => {
+      this.setLikesNumber(data);
+    })
+    .catch(err => console.log(err))
 }
 
-function deleteLikeCard (card) {
-  return api.deleteLike(card)
+function deleteLikeCard(card) {
+  return api.deleteLike(card.getId())
+    .then((data) => {
+      this.setLikesNumber(data);
+    })
+    .catch(err => console.log(err))
 }
-
 
 // Удаление карточки
 
-  function handleDeleteIconCard(card) {
-    confirmDelete.open();
-    confirmDelete.setSubmitAction(() => {
-      api.deleteCard(card.getId())
+function handleDeleteIconCard(card) {
+  confirmDelete.open();
+  confirmDelete.setSubmitAction(() => {
+    api.deleteCard(card.getId())
       .then(() => {
         this.handleDeleteCard(card);
         confirmDelete.close();
       })
       .catch(err => console.log(err))
-   })
-  }
+  })
+}
 
 // Добавление дефолтных карточек
 
@@ -123,7 +121,7 @@ const cardList = new Section({
     cardList.addItem(card);
   }
 },
-elementsCardContainer);
+  elementsCardContainer);
 
 
 // Функция submit профиль
@@ -131,14 +129,14 @@ elementsCardContainer);
 const submitProfileFormHandler = (data) => {
   editProfilePopup.renderLoading(true);
   api.editProfile(data)
-  .then((res) => {
-    userInfo.setUserInfo(res.name, res.about)
-  })
-  .catch(err => console.log(err))
-  editProfilePopup.close()
-  .finally(() => {
-    editProfilePopup.renderLoading(false)
-  })
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about)
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      editProfilePopup.renderLoading(false)
+      editProfilePopup.close()
+    })
 };
 
 // Функция submit аватар
@@ -146,13 +144,13 @@ const submitProfileFormHandler = (data) => {
 const handleAvatarSubmit = (link) => {
   editAvatarPopup.renderLoading(true)
   api.editAvatar(link)
-  .then((res) => {
-    userInfo.setUserAvatar(res)
-    editAvatarPopup.close()
-  }).catch(err => console.log(err))
-  .finally(() => {
-    editAvatarPopup.renderLoading(false)
-  })
+    .then((res) => {
+      userInfo.setUserAvatar(res)
+      editAvatarPopup.close()
+    }).catch(err => console.log(err))
+    .finally(() => {
+      editAvatarPopup.renderLoading(false)
+    })
 }
 
 // Создание классов валидации
@@ -183,10 +181,10 @@ editAvatarPopup.setEventListeners()
 const confirmDelete = new PopupConfirm(".popup_delete");
 confirmDelete.setEventListeners();
 
-const userInfo = new UserInfo({profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle", profileAvatar: ".profile__avatar"});
+const userInfo = new UserInfo({ profileNameSelector: ".profile__title", profileJobSelector: ".profile__subtitle", profileAvatar: ".profile__avatar" });
 
 openPopupButton.addEventListener("click", () => {
-  const {name, job} = userInfo.getUserInfo()
+  const { name, job } = userInfo.getUserInfo()
   nameInput.value = name;
   jobInput.value = job;
   editProfilePopup.open();

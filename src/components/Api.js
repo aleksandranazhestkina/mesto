@@ -4,7 +4,7 @@ export default class Api {
     this._token = options.token;
   }
 
-  _resultRequest(res) {
+  _requestResult(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -13,14 +13,14 @@ export default class Api {
       );
     }
   }
-// Загрузка информации о пользователе
+  // Загрузка информации о пользователе
 
   getUserInfo() {
     return fetch(`${this._url}users/me`, {
       headers: {
         authorization: this._token,
       },
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   getInitialCards() {
@@ -28,7 +28,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       },
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   editProfile(data) {
@@ -42,7 +42,7 @@ export default class Api {
         name: data.name,
         about: data.job
       })
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   addNewCard(data) {
@@ -56,7 +56,7 @@ export default class Api {
         name: data.name,
         link: data.link
       })
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   deleteCard(id) {
@@ -65,7 +65,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       }
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   editAvatar(data) {
@@ -78,7 +78,7 @@ export default class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       })
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   addLike(id) {
@@ -87,7 +87,7 @@ export default class Api {
       headers: {
         authorization: this._token,
       }
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 
   deleteLike(id) {
@@ -96,6 +96,6 @@ export default class Api {
       headers: {
         authorization: this._token,
       }
-    }).then((res) => this._resultRequest(res));
+    }).then((res) => this._requestResult(res));
   }
 }

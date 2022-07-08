@@ -9,7 +9,7 @@
   color: rgb(255, 255, 255);
   cursor: pointer;
   align-self: flex-end;
-  transform: translate(40px, -20px), opacity 0.4s;
+  transform: translate(50px, -20px);
 }
 
 .popup__button-close:hover {
